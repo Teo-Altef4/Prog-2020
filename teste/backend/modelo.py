@@ -11,7 +11,7 @@ class Trem(db.Model):
     def __str__(self):
         return str(self.id)+") "+ self.marca + ", " +\
             self.numero + ", " + self.ano
-     
+    
     def json(self): 
         return { 
             "id": self.id, 
