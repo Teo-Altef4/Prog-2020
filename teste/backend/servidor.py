@@ -32,4 +32,20 @@ def incluir_trem():
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
 
+@app.route("/excluir_trem/<int:trem_id>", methods=["delete"]) 
+def excluir_trem(trem_id): 
+   # preparar uma resposta otimista 
+   resposta = jsonify({"resultado": "ok", "detalhes": "ok"}) 
+   try: 
+      # excluir o trem do ID informado 
+      Trem.query.filter(Trem.id == trem_id).delete() 
+      # confirmar a exclusão 
+      db.session.commit() 
+   except Exception as e: 
+      # informar mensagem de erro 
+      resposta = jsonify({"resultado":"erro", "detalhes":str(e)}) 
+   # adicionar cabeçalho de liberação de origem 
+   resposta.headers.add("Access-Control-Allow-Origin", "*") 
+   return resposta # responder!
+
 app.run(debug=True)

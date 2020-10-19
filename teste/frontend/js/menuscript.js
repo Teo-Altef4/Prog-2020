@@ -19,6 +19,10 @@ $(function() {
                 '<td>' + resposta[i].marca + '</td>' + 
                 '<td>' + resposta[i].numero + '</td>' + 
                 '<td>' + resposta[i].ano + '</td>' + 
+                '<td><a href=# id="excluir_' + resposta[i].id + '" ' + 
+                  'class="excluir_trem"><img src="imagens/delete.png" '+
+                  'alt="Excluir trem" title="Excluir trem"></a>' + 
+                '</td>' + 
                 '</tr>';
                 $('#corpoTabelaTrens').append(lin);
             }
@@ -82,6 +86,31 @@ $('#modalIncluirTrem').on('hide.bs.modal', function (e) {
 });
 
 mostrar_conteudo("conteudoInicial");
+
+$(document).on("click", ".excluir_trem", function() { 
+        var componente_clicado = $(this).attr('id'); 
+        var nome_icone = "excluir_"; 
+        var id_trem = componente_clicado.substring(nome_icone.length); 
+        $.ajax({ 
+            url: 'http://localhost:5000/excluir_trem/'+id_trem, 
+            type: 'delete',
+            dataType: 'json', 
+            success: tremExcluido,
+            error: erroAoExcluir 
+        });
+        function tremExcluido(retorno) {
+            if (retorno.resultado == "ok") {
+                $("#linha_" + id_trem).fadeOut(1000, function() {
+                    alert("Trem removido com sucesso!");
+                });
+            } else {
+                alert(retorno.resultado + ":" + retorno.detalhes);
+            }
+        }
+        function erroAoExcluir(retorno) {
+            alert("Erro ao excluir dados, verifique o backend: ");
+        }
+    });
 });
 
 
