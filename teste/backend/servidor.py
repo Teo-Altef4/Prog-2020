@@ -1,23 +1,24 @@
 from config import *
-from modelo import Trem
+from modelo import Fabricante, Trem, Estado_Cliente
 
 @app.route("/")
 def inicio():
     return 'Sistema de cadastro de trens. '+\
-        '<a href="/listar_trens">Listar Trens</a>'
-
-@app.route("/listar_trens")
-def listar_trens():
-    
-    trens = db.session.query(Trem).all()
-    
-    trens_json = [ x.json() for x in trens ]
-    
-    return jsonify(trens_json)
-    
-    resposta = jsonify(trens_json)
+        '<a href="/listar/Trem">Listar Trem</a>'
+#ROTA PARA LISTAR TRENS
+@app.route("/listar/<string:classe>")
+def listar(classe):
+    dados = None
+    if classe == "Fabricante":
+        dados = db.session.query(Fabricante).all()
+    elif classe == "Trem":
+        dados = db.session.query(Trem).all()
+    elif classe == "Estado_Cliente":
+        dados = db.session.query(Estado_Cliente).all()
+    lista_jsons = [x.json() for x in dados]
+    resposta = jsonify(lista_jsons)
     resposta.headers.add("Access-Control-Allow-Origin", "*")
-    return resposta 
+    return resposta
 
 @app.route("/incluir_trem", methods=['post'])
 def incluir_trem():

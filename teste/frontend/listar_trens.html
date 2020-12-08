@@ -35,7 +35,18 @@
                     <span class="navbar-text">Cadastro de Trens</span>
                     <a class="nav-item nav-link" href="#" id="linkInicio">Início
                         <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#" id="linkListarTrens">Listar</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" 
+                        id="navbarDropdownMenuLink" data-toggle="dropdown" 
+                        aria-haspopup="true" aria-expanded="false">
+                          Listar
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#" id="linkListarFabricantes">Fabricante</a>
+                            <a class="dropdown-item" href="#" id="linkListarTrens">Trens</a> 
+                            <a class="dropdown-item" href="#" id="linkListarEstados_Cliente">Clientes</a>
+                        </div>
+                    </li>
                     <a class="nav-item nav-link" data-toggle="modal" 
                         data-target="#modalIncluirTrem" href="#" data-toggle="modal" data-target="#ExemploModalCentralizado">Incluir</a>
                 </div>
@@ -49,8 +60,8 @@
         </nav>
         <div id="corpoDaPagina">
 
-            <div id="conteudoInicial" class="invisible">
-                Bem vindo ao Cadastro de Trenss
+            <div id="conteudoInicial" >
+                Bem vindo ao Cadastro de Trens
             </div>
 
             <div class="modal fade" id="modalIncluirTrem" tabindex="-1" role="dialog"
@@ -80,6 +91,11 @@
                                     <input type="text" class="form-control" id="campoAno"
                                         aria-describedby="AnoHelp" placeholder="Informe o ano do trem">
                                 </div>
+                                <div class="form-group">
+                                    <label for="campoIdFabricante">Id Fabricante</label>
+                                    <input type="text" class="form-control" id="campoIdFabricante"
+                                        aria-describedby="idfabricanteHelp" placeholder="Informe o id do fabricante">
+                                </div>
                             </form>
                         </div>
 
@@ -91,19 +107,50 @@
                 </div>
             </div>
 
-            <table class="table invisible table-striped table-hover" id="TabelaTrens">
+        <div class="container" id="ListarFabricantes">
+            <table class=" table-striped table-hover" id="TabelaFrabicantes">
                 <thead>
-                    <!-- primeira linha da tabela: títulos -->
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Nação</th>
+                        <th scope="col">Excluir</th> 
+                    </tr>
+                </thead>
+                <tbody id="corpoTabelaFabricantes">
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="container" id="ListarTrens">
+            <table class=" table-striped table-hover" id="TabelaTrens">
+                <thead>
                     <tr>
                         <th scope="col">Marca</th>
                         <th scope="col">Número</th>
                         <th scope="col">Ano</th>
+                        <th scope="col">Fabricante</th>
                         <th scope="col">Excluir</th> 
                     </tr>
                 </thead>
                 <tbody id="corpoTabelaTrens">
                 </tbody>
             </table>
+        </div>
+
+        <div class="container" id="ListarEstados_Cliente">
+            <table class=" table-striped table-hover" id="TabelaEstados_Cliente">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Trem</th>
+                        <th scope="col">Excluir</th> 
+                    </tr>
+                </thead>
+                <tbody id="corpoTabelaEstados_Cliente">
+                </tbody>
+            </table>
+        </div>
+            
 
         </div> <!-- fim da div -->
     </div>
